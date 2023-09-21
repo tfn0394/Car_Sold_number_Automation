@@ -902,14 +902,7 @@ try:
     last_day_of_previous_month_str = last_day_of_previous_month.strftime('%d-%b-%y')
 
     # Dictionary that maps file names or file paths to the corresponding data
-    data_dict = {'K:/interest-nz/interest.co.nz/chart_data/industry/newvehicles-cgrowth.csv': [last_day_of_previous_month, ((c_number/last_13th_cell_D.value)-1)*100],
-                'K:/interest-nz/interest.co.nz/chart_data/industry/newvehicles-commercial.csv': [last_day_of_previous_month, c_number],
-                'K:/interest-nz/interest.co.nz/chart_data/industry/newvehicles-importedcars.csv': [last_day_of_previous_month, up_number],
-                'K:/interest-nz/interest.co.nz/chart_data/industry/newvehicles-newcannualsales.csv': [last_day_of_previous_month, sum_value_L],
-                'K:/interest-nz/interest.co.nz/chart_data/industry/newvehicles-newpannualsales.csv': [last_day_of_previous_month, sum_value_K],
-                'K:/interest-nz/interest.co.nz/chart_data/industry/newvehicles-passenger.csv': [last_day_of_previous_month, p_number],
-                'K:/interest-nz/interest.co.nz/chart_data/industry/newvehicles-pgrowth.csv': [last_day_of_previous_month, ((p_number/last_13th_cell_C.value)-1)*100],
-                'K:/interest-nz/interest.co.nz/chart_data/industry/newvehicles-usedpannualsales.csv': [last_day_of_previous_month, sum_value_U]}
+    data_dict = {sample}
 
     # Loop through the data_dict and update each file
     for file_path, new_data in data_dict.items():
@@ -934,39 +927,25 @@ try:
             writer = csv.writer(csv_file)
             writer.writerows(rows)
 
-    workbook.save(filename="K:/interest-nz/Statistics NZ/NewVehicleSales-NZ.xlsx")
+    workbook.save(filename="sample")
     #workbook.save(filename="C:/Users/User/Desktop/Python_Excel/NewVehicleSales-NZ-copy.xlsx")
 
     print('                                          Csv files Updated')
     print('\n------------------------------------------------------------------------------------------------------\n')
 
     #------------------------------------------------------------------Update csv data to website
-    host = 'nfs.interest.co.nz'
+    host = 'sample'
 
     transport = Transport(host)
     transport.connect(None, myconstants.USERNAME, myconstants.PASSWORD)
     sftp = SFTPClient.from_transport(transport)
 
     local_paths = [
-    "K:\\interest-nz\\interest.co.nz\\chart_data\\industry\\newvehicles-passenger.csv",
-    "K:\\interest-nz\\interest.co.nz\\chart_data\\industry\\newvehicles-usedpannualsales.csv",
-    "K:\\interest-nz\\interest.co.nz\\chart_data\\industry\\newvehicles-newpannualsales.csv",
-    "K:\\interest-nz\\interest.co.nz\\chart_data\\industry\\newvehicles-importedcars.csv",
-    "K:\\interest-nz\\interest.co.nz\\chart_data\\industry\\newvehicles-pgrowth.csv",
-    "K:\\interest-nz\\interest.co.nz\\chart_data\\industry\\newvehicles-newcannualsales.csv",
-    "K:\\interest-nz\\interest.co.nz\\chart_data\\industry\\newvehicles-commercial.csv",
-    "K:\\interest-nz\\interest.co.nz\\chart_data\\industry\\newvehicles-cgrowth.csv"
+    sample
     ]
 
     remote_paths = [
-    "/var/www/drupal8.interest.co.nz/web/sites/default/files/charts-csv/chart_data/industry/newvehicles-passenger.csv",
-    "/var/www/drupal8.interest.co.nz/web/sites/default/files/charts-csv/chart_data/industry/newvehicles-usedpannualsales.csv",
-    "/var/www/drupal8.interest.co.nz/web/sites/default/files/charts-csv/chart_data/industry/newvehicles-newpannualsales.csv",
-    "/var/www/drupal8.interest.co.nz/web/sites/default/files/charts-csv/chart_data/industry/newvehicles-importedcars.csv",
-    "/var/www/drupal8.interest.co.nz/web/sites/default/files/charts-csv/chart_data/industry/newvehicles-pgrowth.csv",
-    "/var/www/drupal8.interest.co.nz/web/sites/default/files/charts-csv/chart_data/industry/newvehicles-newcannualsales.csv",
-    "/var/www/drupal8.interest.co.nz/web/sites/default/files/charts-csv/chart_data/industry/newvehicles-commercial.csv",
-    "/var/www/drupal8.interest.co.nz/web/sites/default/files/charts-csv/chart_data/industry/newvehicles-cgrowth.csv"
+    sample
     ]
 
     for i in range(len(local_paths)):
